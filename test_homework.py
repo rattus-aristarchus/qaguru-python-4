@@ -7,8 +7,11 @@ def test_greeting():
     """
     name = "Анна"
     age = 25
+
     # TODO Сформируйте нужную строку
     output = f"Привет, {name}! Тебе {age} лет."
+    print(output)
+
     # Проверяем результат
     assert output == "Привет, Анна! Тебе 25 лет."
 
@@ -23,10 +26,12 @@ def test_rectangle():
 
     # TODO сосчитайте периметр
     perimeter = a * 2 + b * 2
+    print(f"Длина периметра равна {perimeter}")
     assert perimeter == 60
 
     # TODO сосчитайте площадь
     area = a * b
+    print(f"Площадь равна{area}")
     assert area == 200
 
 
@@ -38,10 +43,12 @@ def test_circle():
     r = 23
     # TODO сосчитайте площадь
     area = math.pi * r ** 2
+    print(f"Площадь равна {area}")
     assert area == 1661.9025137490005
 
     # TODO сосчитайте длину окружности
     length = 2 * math.pi * r
+    print(f"Длина окружности равна {length}")
     assert length == 144.51326206513048
 
 
@@ -52,19 +59,8 @@ def test_random_list():
 
     # решение:
 
-    l = []
-
-    for i in range(10):
-        l.append(random.randint(0, 100))
-
-    l_sorted = []
-
-    for num in l:
-        where_to_put = 0
-        for i in range(len(l)):
-            if num < l[i]:
-                where_to_put = i
-        l_sorted.insert(where_to_put, num)
+    l = [random.randint(1, 100) for _ in range(10)]
+    l.sort()
 
     assert len(l) == 10
     assert l[0] < l[-1]
@@ -78,13 +74,7 @@ def test_unique_elements():
 
     # решение:
 
-    l_unique = []
-
-    for num in l:
-        if not num in l_unique:
-            l_unique.append(num)
-
-    l = l_unique
+    l = list(set(l))
 
     assert isinstance(l, list)
     assert len(l) == 10
