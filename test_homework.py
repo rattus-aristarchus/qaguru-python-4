@@ -1,4 +1,5 @@
-
+import math
+import random
 
 def test_greeting():
     """
@@ -7,7 +8,7 @@ def test_greeting():
     name = "Анна"
     age = 25
     # TODO Сформируйте нужную строку
-    output = ""
+    output = f"Привет, {name}! Тебе {age} лет."
     # Проверяем результат
     assert output == "Привет, Анна! Тебе 25 лет."
 
@@ -21,11 +22,11 @@ def test_rectangle():
     b = 20
 
     # TODO сосчитайте периметр
-    perimeter = 0
+    perimeter = a * 2 + b * 2
     assert perimeter == 60
 
     # TODO сосчитайте площадь
-    area = 0
+    area = a * b
     assert area == 200
 
 
@@ -36,11 +37,11 @@ def test_circle():
     """
     r = 23
     # TODO сосчитайте площадь
-    area = 0
+    area = math.pi * r ** 2
     assert area == 1661.9025137490005
 
     # TODO сосчитайте длину окружности
-    length = 0
+    length = 2 * math.pi * r
     assert length == 144.51326206513048
 
 
@@ -49,8 +50,22 @@ def test_random_list():
     Создайте список из 10 случайных чисел от 1 до 100 и отсортируйте его по возрастанию.
     """
 
-    # TODO создайте список
+    # решение:
+
     l = []
+
+    for i in range(10):
+        l.append(random.randint(0, 100))
+
+    l_sorted = []
+
+    for num in l:
+        where_to_put = 0
+        for i in range(len(l)):
+            if num < l[i]:
+                where_to_put = i
+        l_sorted.insert(where_to_put, num)
+
     assert len(l) == 10
     assert l[0] < l[-1]
 
@@ -60,7 +75,16 @@ def test_unique_elements():
     Удалите из списка все повторяющиеся элементы
     """
     l = [1, 2, 3, 4, 5, 5, 5, 6, 7, 8, 8, 9, 10, 10]
-    # TODO удалите повторяющиеся элементы
+
+    # решение:
+
+    l_unique = []
+
+    for num in l:
+        if not num in l_unique:
+            l_unique.append(num)
+
+    l = l_unique
 
     assert isinstance(l, list)
     assert len(l) == 10
@@ -76,8 +100,14 @@ def test_dicts():
     """
     first = ["a", "b", "c", "d", "e"]
     second = [1, 2, 3, 4, 5]
-    # TODO создайте словарь
-    d = {}
+
+    # решение:
+
+    d = dict(zip(first, second))
+
+    print("\n")
+    for letter, number in d.items():
+        print(f"The letter is {letter}, the number is {number}.")
 
     assert isinstance(d, dict)
     assert len(d) == 5
